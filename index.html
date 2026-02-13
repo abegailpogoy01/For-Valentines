@@ -4,9 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Koi 💖</title>
-
 <style>
-/* Font */
+/* Font & body */
 body {
     margin:0;
     padding:0;
@@ -40,7 +39,6 @@ body {
     background:white;
     animation:twinkle 2s infinite alternate;
 }
-
 @keyframes twinkle{
     0%{opacity:0.3;}
     100%{opacity:1;}
@@ -56,7 +54,6 @@ body {
     border-radius:50%;
     animation:waveMove 12s linear infinite;
 }
-
 @keyframes waveMove{
     0%{transform:translateX(0);}
     100%{transform:translateX(-50%);}
@@ -69,7 +66,6 @@ body {
     animation:floatUp 15s linear infinite;
     opacity:0.8;
 }
-
 @keyframes floatUp{
     0%{transform:translateY(100vh) scale(0.5);opacity:0;}
     50%{opacity:1;}
@@ -84,7 +80,7 @@ body {
     cursor:pointer;
 }
 
-/* Envelope */
+/* Envelope body */
 .envelope{
     width:100%;
     height:100%;
@@ -95,17 +91,18 @@ body {
     z-index:1;
 }
 
-/* Flap */
+/* Envelope flap with soft curve */
 .flap{
     width:100%;
-    height:100%;
+    height:50%;
     background:#274b63;
     position:absolute;
     top:0;
-    clip-path:polygon(0 0,100% 0,50% 60%);
-    transform-origin:top;
+    clip-path: polygon(0 100%, 50% 0, 100% 100%);
+    border-top-left-radius:15px;
+    border-top-right-radius:15px;
+    transform-origin: top center;
     transition:0.8s ease;
-    border-radius:15px;
     z-index:2;
 }
 
@@ -132,6 +129,14 @@ body {
     z-index:1;
 }
 
+.letter .poem{
+    display:none;
+    margin-top:20px;
+    font-style:italic;
+    text-align:center;
+    color:#111;
+}
+
 .open .letter{
     transform:translateY(0);
 }
@@ -146,6 +151,9 @@ body {
         font-size:12px;
         padding:15px;
     }
+    .letter .poem{
+        font-size:11px;
+    }
 }
 </style>
 </head>
@@ -158,7 +166,29 @@ body {
 <div class="envelope-wrapper" id="env" onclick="openLetter()">
     <div class="envelope"></div>
     <div class="flap"></div>
-    <div class="letter" id="message"></div>
+    <div class="letter" id="message">
+        <div class="poem" id="poem">
+            Ikaw ang ilaw sa aking dilim,<br>
+            ang tinig ng alon sa bawat himig.<br>
+            Sa bawat tinta at bawat kulay,<br>
+            ikaw ang musa na sa puso’y humuhugis.<br><br>
+
+            Lumulubog ako sa dagat ng damdamin,<br>
+            hinahaplos ng alaala mo ang bawat himbing.<br>
+            Bawat titig mo’y parang bituin sa gabi,<br>
+            bawat ngiti mo’y lihim na nag-aalab sa labi.<br><br>
+
+            Pag-ibig ko’y karagatan na walang dulo,<br>
+            sa bawat alon, pangalan mo ang binubuo.<br>
+            Ikaw ang hangin sa aking mga tula,<br>
+            ang dahilan ng bawat halakhak at luha.<br><br>
+
+            At kahit ako’y nalulunod sa kalaliman,<br>
+            sa’yo lang bumabalik ang aking hangarin.<br>
+            Ikaw at ako, dalawang pusong naglalayag,<br>
+            sa parehong dagat, sa parehong pangarap na wagas.
+        </div>
+    </div>
 </div>
 
 <script>
@@ -189,6 +219,9 @@ function type(){
         document.getElementById("message").innerHTML += text.charAt(index);
         index++;
         setTimeout(type,25);
+    } else {
+        // Show poem after letter finishes
+        document.getElementById("poem").style.display = "block";
     }
 }
 
@@ -219,4 +252,3 @@ setInterval(()=>createFloating("🦋","butterfly"),2500);
 
 </body>
 </html>
-
