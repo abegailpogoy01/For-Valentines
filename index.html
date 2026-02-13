@@ -84,20 +84,6 @@ body {
     cursor:pointer;
 }
 
-/* Wax seal */
-.wax{
-    position:absolute;
-    top:40%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    width:60px;
-    height:60px;
-    background:#b22222;
-    border-radius:50%;
-    box-shadow:0 0 10px #ff0000;
-    z-index:3;
-}
-
 /* Envelope */
 .envelope{
     width:100%;
@@ -150,24 +136,6 @@ body {
     transform:translateY(0);
 }
 
-/* Pixel Cats */
-.pixel-cat{
-    position:absolute;
-    bottom:10px;
-    width:50px;
-    height:50px;
-    image-rendering: pixelated;
-}
-
-#cat1{ left: 30px; animation:wag 1s infinite alternate;}
-#cat2{ right: 30px; animation:wag 1s infinite alternate;}
-
-@keyframes wag{
-    0%{transform: rotate(0deg);}
-    50%{transform: rotate(5deg);}
-    100%{transform: rotate(0deg);}
-}
-
 /* Mobile responsiveness */
 @media (max-width:500px){
     .envelope-wrapper{
@@ -177,11 +145,6 @@ body {
     .letter{
         font-size:12px;
         padding:15px;
-    }
-    #cat1,#cat2{
-        width:35px;
-        height:35px;
-        bottom:5px;
     }
 }
 </style>
@@ -193,15 +156,10 @@ body {
 
 <!-- Envelope wrapper -->
 <div class="envelope-wrapper" id="env" onclick="openLetter()">
-    <div class="wax" id="wax"></div>
     <div class="envelope"></div>
     <div class="flap"></div>
     <div class="letter" id="message"></div>
 </div>
-
-<!-- Pixel Cats -->
-<img src="https://i.imgur.com/LrjXw5P.png" id="cat1" class="pixel-cat">
-<img src="https://i.imgur.com/LrjXw5P.png" id="cat2" class="pixel-cat">
 
 <script>
 const text = `Hello, koi!
@@ -222,15 +180,8 @@ let opened = false;
 function openLetter(){
     if(opened) return;
     opened = true;
-    // Melt wax first
-    const wax = document.getElementById("wax");
-    wax.style.transition = "all 1s ease";
-    wax.style.opacity = "0";
-    wax.style.transform = "scale(0.5)";
-    setTimeout(()=>{
-        document.getElementById("env").classList.add("open");
-        type();
-    },1000);
+    document.getElementById("env").classList.add("open");
+    type();
 }
 
 function type(){
@@ -268,3 +219,4 @@ setInterval(()=>createFloating("🦋","butterfly"),2500);
 
 </body>
 </html>
+
